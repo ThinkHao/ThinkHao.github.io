@@ -1,6 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>CentOS7编译安装指定版本内核</title>
+    <url>/2020/01/02/CentOS7%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85%E6%8C%87%E5%AE%9A%E7%89%88%E6%9C%AC%E5%86%85%E6%A0%B8/</url>
+    <content><![CDATA[<p>工作中，在Linux服务器上部署服务时，常常有升级内核的需求，有过一两次的折腾经历，便想通过博客记录下来，方便日后查看。</p>
+<p>以下操作步骤，均已在本地虚拟机中测试通过。</p>
+<h3 id="1-下载内核文件"><a href="#1-下载内核文件" class="headerlink" title="1.下载内核文件"></a>1.下载内核文件</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> /usr/<span class="built_in">local</span>/src/</span><br><span class="line">wget https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-5.2.11.tar.xz</span><br></pre></td></tr></table></figure>
+<h3 id="2-解压压缩包"><a href="#2-解压压缩包" class="headerlink" title="2.解压压缩包"></a>2.解压压缩包</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">tar xf linux-5.2.11.tar.xz</span><br></pre></td></tr></table></figure>
+<h3 id="3-把旧内核的配置文件拷贝到当前目录"><a href="#3-把旧内核的配置文件拷贝到当前目录" class="headerlink" title="3.把旧内核的配置文件拷贝到当前目录"></a>3.把旧内核的配置文件拷贝到当前目录</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">cp /boot/config-3.10.0-957.el7.x86_64 ./.config</span><br></pre></td></tr></table></figure>
+<h3 id="4-安装依赖包"><a href="#4-安装依赖包" class="headerlink" title="4.安装依赖包"></a>4.安装依赖包</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum -y groupinstall <span class="string">"development tools"</span></span><br></pre></td></tr></table></figure>
+<p>如果groupinstall报错，就添加参数–setopt=group_package_types=mandatory,default,optional</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum -y install ncurses-devel</span><br><span class="line">yum -y install elfutils-libelf-devel openssh-devel bc</span><br></pre></td></tr></table></figure>
+<h3 id="5-运行make-menuconfig（窗口不能太小，否则会报错）"><a href="#5-运行make-menuconfig（窗口不能太小，否则会报错）" class="headerlink" title="5.运行make menuconfig（窗口不能太小，否则会报错）"></a>5.运行make menuconfig（窗口不能太小，否则会报错）</h3><h4 id="1-修改内核名称-General-setup-—-gt-local-version-append-to-kernel-release"><a href="#1-修改内核名称-General-setup-—-gt-local-version-append-to-kernel-release" class="headerlink" title="1) 修改内核名称 General setup —&gt;local version -append to kernel release"></a>1) 修改内核名称 General setup —&gt;local version -append to kernel release</h4><h4 id="2-添加NTFS文件系统支持模块-File-systems-—-gt-DOS-FAT-NT-Filesystems-—-gt-NTFS-file-system-support"><a href="#2-添加NTFS文件系统支持模块-File-systems-—-gt-DOS-FAT-NT-Filesystems-—-gt-NTFS-file-system-support" class="headerlink" title="2) 添加NTFS文件系统支持模块 File systems —&gt;DOS/FAT/NT Filesystems —&gt;NTFS file system support"></a>2) 添加NTFS文件系统支持模块 File systems —&gt;DOS/FAT/NT Filesystems —&gt;NTFS file system support</h4><h3 id="6-编译安装模块"><a href="#6-编译安装模块" class="headerlink" title="6.编译安装模块"></a>6.编译安装模块</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">make modules_install</span><br></pre></td></tr></table></figure>
+<h3 id="7-安装内核核心文件"><a href="#7-安装内核核心文件" class="headerlink" title="7.安装内核核心文件"></a>7.安装内核核心文件</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">make install</span><br></pre></td></tr></table></figure>
+<h3 id="8-重启"><a href="#8-重启" class="headerlink" title="8.重启"></a>8.重启</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">reboot</span><br></pre></td></tr></table></figure>
+<p>重启后，正常情况下，内核就已经完成升级了。</p>
+]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>Kernel</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>CentOS7安装Docker-CE</title>
     <url>/2020/01/02/CentOS7%E5%AE%89%E8%A3%85Docker-CE/</url>
     <content><![CDATA[<h3 id="1-OS需要为CentOS7的维护版，docker分为CE社区版和EE企业版"><a href="#1-OS需要为CentOS7的维护版，docker分为CE社区版和EE企业版" class="headerlink" title="1.OS需要为CentOS7的维护版，docker分为CE社区版和EE企业版"></a>1.OS需要为CentOS7的维护版，docker分为CE社区版和EE企业版</h3><h3 id="2-卸载系统自带的旧版本"><a href="#2-卸载系统自带的旧版本" class="headerlink" title="2.卸载系统自带的旧版本"></a>2.卸载系统自带的旧版本</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum remove docker \</span><br><span class="line">                docker-client \</span><br><span class="line">                docker-client-latest \</span><br><span class="line">                docker-common \</span><br><span class="line">                docker-latest \</span><br><span class="line">                docker-latest-logrotate \</span><br><span class="line">                docker-logrotate \</span><br><span class="line">                docker-selinux \</span><br><span class="line">                docker-engine-selinux \</span><br><span class="line">                docker-engine</span><br></pre></td></tr></table></figure>
