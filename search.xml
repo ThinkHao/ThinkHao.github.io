@@ -10,7 +10,7 @@
 <h3 id="4-启动docker、设置开机自启"><a href="#4-启动docker、设置开机自启" class="headerlink" title="4.启动docker、设置开机自启"></a>4.启动docker、设置开机自启</h3>  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl start docker</span><br><span class="line">systemctl <span class="built_in">enable</span> docker</span><br></pre></td></tr></table></figure>
 <h3 id="5-测试docker安装"><a href="#5-测试docker安装" class="headerlink" title="5.测试docker安装"></a>5.测试docker安装</h3>  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker run hello-world</span><br></pre></td></tr></table></figure>
 <h3 id="6-卸载Docker-CE"><a href="#6-卸载Docker-CE" class="headerlink" title="6.卸载Docker-CE"></a>6.卸载Docker-CE</h3>  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum -y remove docker-ce</span><br><span class="line">rm -rf /var/lib/docker</span><br></pre></td></tr></table></figure>
-<h3 id="或者直接脚本安装："><a href="#或者直接脚本安装：" class="headerlink" title="或者直接脚本安装："></a>或者直接脚本安装：</h3>  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl -fsSL https://get.docker.com -o get-docker.sh</span><br><span class="line">sh get-docker.sh</span><br></pre></td></tr></table></figure>]]></content>
+<h3 id="或者直接脚本安装"><a href="#或者直接脚本安装" class="headerlink" title="或者直接脚本安装"></a>或者直接脚本安装</h3>  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl -fsSL https://get.docker.com -o get-docker.sh</span><br><span class="line">sh get-docker.sh</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
         <category>Linux</category>
       </categories>
