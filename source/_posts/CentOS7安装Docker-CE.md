@@ -58,7 +58,7 @@ categories:
   yum -y remove docker-ce
   rm -rf /var/lib/docker
   ```
-### 或者直接脚本安装：
+### 或者直接脚本安装
   ```bash
   curl -fsSL https://get.docker.com -o get-docker.sh
   sh get-docker.sh
