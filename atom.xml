@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-12-15T14:13:16.070Z</updated>
+  <updated>2020-01-02T02:38:52.385Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>CentOS7安装Docker-CE</title>
+    <link href="http://yoursite.com/2020/01/02/CentOS7%E5%AE%89%E8%A3%85Docker-CE/"/>
+    <id>http://yoursite.com/2020/01/02/CentOS7%E5%AE%89%E8%A3%85Docker-CE/</id>
+    <published>2020-01-02T02:24:29.000Z</published>
+    <updated>2020-01-02T02:38:52.385Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="1-OS需要为CentOS7的维护版，docker分为CE社区版和EE企业版"><a href="#1-OS需要为CentOS7的维护版，docker分为CE社区版和EE企业版" class="headerlink" title="1.OS需要为CentOS7的维护版，docker分为CE社区版和EE企业版"></a>1.OS需要为CentOS7的维护版，docker分为CE社区版和EE企业版</h3><h3 id="2-卸载系统自带的旧版本"><a href="#2-卸载系统自带的旧版本" class="headerlink" title="2.卸载系统自带的旧版本"></a>2.卸载系统自带的旧版本</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">yum remove docker \</span><br><span class="line">                docker-client \</span><br><span class="line">                docker-client-latest \</span><br><span class="line">                docker-common \</span><br><span class="line">                docker-latest \</span><br><span class="line">                docker-latest-logrotate \</span><br><span class="line">                docker-logrotate \</span><br><span class="line">                docker-selinux \</span><br><span class="line">                docker-engine-selinux \</span><br><span class="line">                docker-engine</span><br></pre></td></tr></table></figure><h3 id="3-安装Docker-CE"><a href="#3-安装Docker-CE" class="headerlink" title="3.安装Docker CE"></a>3.安装Docker CE</h3><h4 id="1）安装所需依赖包"><a href="#1）安装所需依赖包" class="headerlink" title="1）安装所需依赖包"></a>1）安装所需依赖包</h4>  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum install -y yum-utils \</span><br><span class="line">device-mapper-persistent-data \</span><br><span class="line">lvm2</span><br></pre></td></tr></table></figure><h4 id="2）导入docker的软件库（稳定版）"><a href="#2）导入docker的软件库（稳定版）" class="headerlink" title="2）导入docker的软件库（稳定版）"></a>2）导入docker的软件库（稳定版）</h4>  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum-config-manager \</span><br><span class="line">  --add-repo \</span><br><span class="line">  https://download.docker.com/linux/centos/docker-ce.repo</span><br></pre></td></tr></table></figure><h4 id="3）安装Docker-CE"><a href="#3）安装Docker-CE" class="headerlink" title="3）安装Docker CE"></a>3）安装Docker CE</h4><p>  默认安装最新版<br>  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install docker-ce</span><br></pre></td></tr></table></figure><br>  安装指定版本<br>  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum list docker-ce --showduplicates | sort -r</span><br><span class="line">yum install docker-ce-&lt;VERSION STRING&gt;</span><br></pre></td></tr></table></figure></p><h3 id="4-启动docker、设置开机自启"><a href="#4-启动docker、设置开机自启" class="headerlink" title="4.启动docker、设置开机自启"></a>4.启动docker、设置开机自启</h3>  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl start docker</span><br><span class="line">systemctl <span class="built_in">enable</span> docker</span><br></pre></td></tr></table></figure><h3 id="5-测试docker安装"><a href="#5-测试docker安装" class="headerlink" title="5.测试docker安装"></a>5.测试docker安装</h3>  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run hello-world</span><br></pre></td></tr></table></figure><h3 id="6-卸载Docker-CE"><a href="#6-卸载Docker-CE" class="headerlink" title="6.卸载Docker-CE"></a>6.卸载Docker-CE</h3>  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum -y remove docker-ce</span><br><span class="line">rm -rf /var/lib/docker</span><br></pre></td></tr></table></figure><h3 id="或者直接脚本安装："><a href="#或者直接脚本安装：" class="headerlink" title="或者直接脚本安装："></a>或者直接脚本安装：</h3>  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">curl -fsSL https://get.docker.com -o get-docker.sh</span><br><span class="line">sh get-docker.sh</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;1-OS需要为CentOS7的维护版，docker分为CE社区版和EE企业版&quot;&gt;&lt;a href=&quot;#1-OS需要为CentOS7的维护版，docker分为CE社区版和EE企业版&quot; class=&quot;headerlink&quot; title=&quot;1.OS需要为CentOS7的维
+      
+    
+    </summary>
+    
+    
+      <category term="Linux" scheme="http://yoursite.com/categories/Linux/"/>
+    
+    
+      <category term="Linux" scheme="http://yoursite.com/tags/Linux/"/>
+    
+      <category term="Docker" scheme="http://yoursite.com/tags/Docker/"/>
+    
+  </entry>
   
   <entry>
     <title>Hello World</title>
